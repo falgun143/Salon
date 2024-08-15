@@ -139,8 +139,8 @@ const Card1 = ({ feature }: { feature: CardFeature }) => {
             },
 
             minWidth: {
-              xs: "90vw",
-              md: "720px",
+              xs: "100vw",
+              md: "780px",
             },
             borderRadius: 4,
             justifyContent: "center",
@@ -160,7 +160,7 @@ const Card1 = ({ feature }: { feature: CardFeature }) => {
           <CloseButton onClick={handleClose} />
         </Box>
 
-        <DialogContent  style={{  width: "100%", padding: "0px 0px 0px 50px"}}>
+        <DialogContent  style={{  width: "100%", padding: "0px 10px 0px 50px"}}>
           <Typography fontSize={"28px"} fontWeight={"bold"} marginBottom={3}>
             {feature.title}
           </Typography>
