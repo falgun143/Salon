@@ -13,24 +13,27 @@ interface AppbarProps {
 }
 
 const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCategory }) => {
+  const theme = useTheme();
+  const isMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
   const categoriesRef = useRef<HTMLDivElement>(null);
   const [visibleHeadings, setVisibleHeadings] = useState<string[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(4);
-
-  const theme = useTheme();
-  const isMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
 
   const updateVisibleHeadings = (start: number, end: number) => {
     setVisibleHeadings(data.headings.slice(start, end + 1).map(h => h.heading));
   };
 
   useEffect(() => {
-    updateVisibleHeadings(startIndex, endIndex);
-  }, [startIndex, endIndex]);
+    if (isMediumScreen) {
+      updateVisibleHeadings(startIndex, endIndex);
+    } else {
+      setVisibleHeadings(data.headings.map(h => h.heading));
+    }
+  }, [startIndex, endIndex, isMediumScreen]);
 
   const handleScroll = () => {
-    const headerHeight = 180; // Adjust based on header height
+    const headerHeight = 180; 
     let activeHeading = "";
 
     data.headings.forEach((heading) => {
@@ -46,11 +49,20 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
     if (activeHeading && activeCategory !== activeHeading) {
       setActiveCategory(activeHeading);
       const index = data.headings.findIndex(h => h.heading === activeHeading);
-      const newStartIndex = Math.max(0, index - 1);
+      const newStartIndex = Math.max(0, index);
       const newEndIndex = Math.min(data.headings.length - 1, newStartIndex + 4);
 
       setStartIndex(newStartIndex);
       setEndIndex(newEndIndex);
+    }
+
+    if (!isMediumScreen) {
+      // Synchronize horizontal scroll with vertical scroll
+      const container = categoriesRef.current;
+      if (container) {
+        const scrollAmount = window.scrollY / 2; 
+        container.scrollLeft = scrollAmount;
+      }
     }
   };
 
@@ -58,7 +70,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
     const container = categoriesRef.current;
     if (container) {
       const containerWidth = container.clientWidth;
-      const headingWidth = containerWidth / 2; // Adjust based on your layout
+      const headingWidth = containerWidth / 2; 
       const scrollAmount = direction === "right" ? headingWidth : -headingWidth;
 
       if (direction === "right" && endIndex < data.headings.length - 1) {
@@ -68,8 +80,8 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
         setEndIndex(newEndIndex);
 
         // Smoothly scroll to the right
-        container.scrollTo({
-          left: container.scrollLeft + scrollAmount,
+        container.scrollBy({
+          left: scrollAmount,
           behavior: 'smooth',
         });
       } else if (direction === "left" && startIndex > 0) {
@@ -79,8 +91,8 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
         setEndIndex(newEndIndex);
 
         // Smoothly scroll to the left
-        container.scrollTo({
-          left: container.scrollLeft + scrollAmount,
+        container.scrollBy({
+          left: scrollAmount,
           behavior: 'smooth',
         });
       }
@@ -90,7 +102,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
   const scrollToHeading = (heading: string) => {
     const section = document.getElementById(heading);
     if (section) {
-      const headerOffset = 245; // Adjust based on your layout
+      const headerOffset = 245; 
       const elementPosition = section.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -101,7 +113,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
       setActiveCategory(heading);
 
       const index = data.headings.findIndex(h => h.heading === heading);
-      const newStartIndex = Math.max(0, index - 1);
+      const newStartIndex = Math.max(0, index);
       const newEndIndex = Math.min(data.headings.length - 1, newStartIndex + 4);
 
       setStartIndex(newStartIndex);
@@ -115,7 +127,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [activeCategory]);
+  }, [activeCategory, isMediumScreen]);
 
   return (
     <>
@@ -155,7 +167,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
             justifyContent: "flex-start",
             padding: "10px 0",
             whiteSpace: "nowrap",
-            overflowX: "auto", // Ensure horizontal scrolling is enabled
+            overflowX: "auto",
             position: "relative",
             marginBottom: 2,
           }}
@@ -165,7 +177,11 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
             sx={{
               display: "flex",
               overflowX: "auto",
-              width: "fit-content", // Adjust width to fit content
+              transition: "transform 0.7s ease",
+              width: {
+                xs: "100%",
+                md: "45%"
+              },
               gap: "20px",
               alignItems: "center",
               scrollBehavior: "smooth",
@@ -174,7 +190,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
                 md: 33
               },
               '&::-webkit-scrollbar': {
-                display: 'none', // Hide scrollbar in webkit browsers
+                display: 'none'
               },
             }}
           >
