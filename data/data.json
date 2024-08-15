@@ -1,0 +1,286 @@
+{
+
+    "headings":
+    [
+    {"heading":"Featured", "description":""},
+    {"heading":"Haircutting","description":"We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival."},
+    {"heading":"Styling", "description":"Our Silk Press service does not include a trim"},
+    {"heading":"Color Services","description":""},
+    {"heading":"Natural Hairstyling","description":""},
+    {"heading":"Relaxer/ Texturizer/ Keratin","description":""},
+    {"heading":"Extension, Installs and Wigs","description":""},
+    {"heading":"Treatments","description":""}
+],
+   "Featured": [
+      {
+        "title": "Haircut",
+        "timestamp": "1 hr, 30 mins - 2 hrs",
+        "description": "We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival.",
+        "cost": "from $90"
+      },
+      {
+        "title": "Deep Condition (Standard)",
+        "timestamp": "15 mins",
+        "description": "This is an add on deep conditioning treatment service for clients who need to restore moisture back into their hair. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled.",
+        "cost": "$25"
+      },
+      {
+        "title": "Blow Dry/Silk Press",
+        "timestamp": "1 hrs - 2 hrs",
+        "description":"Please do NOT apply castor oil or coconut oil to hair before service.If you have NOT had a professional trim/haircut in the last 3 months, you must book a haircut service.",
+        "cost": "$85"
+      },
+      {
+        "title": "Root Touch-Up (Single Process)",
+        "timestamp": "1 hr",
+        "description": "For RETURNING client, and anyone needing a root touch up. With less that 2 inches of root.MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+        "cost": "$125"
+      },
+      {
+        "title": "Wash & Go - Curly Style",
+        "timestamp": "1 hr, 25 mins",
+        "description": "",
+        "cost": "$60"
+      },
+      {
+        "title": "Haircut Short Tapered",
+        "timestamp": "1 hr - 2 hrs",
+        "description": "A taper is a cut that leaves your hair long at the top and short on the sides. Hair gradually gets shorter as you move down the back and sides of your head. THIS IS NOT A BARBER HAIRCUT. We do not do low fades or tight fades. This is a soft short haircut.The finished style is a wash-and-go.This is NOT for wearing your hair straight.",
+        "cost": "from $130"
+      }
+    ],
+    "Haircutting":[
+        {
+            "title": "A Bob Haircut",
+            "timestamp": "1 hr - 2 hrs",
+            "description": "A bob cut, is a short to medium length haircut, in which the hair is typically cut straight around the head at approximately jaw level, and no longer than shoulder-length.A bob cut is typically done on straight hair, but can be worn curly.",
+            "cost": "from $110"
+          },
+          {
+            "title": "Haircut",
+            "timestamp": "1 hr, 30 mins - 2 hrs",
+            "description":"We do not have pricing for trims. All haircuts are full services that include a wash and style; either a wash and go or a silk press. Specify with stylist upon arrival.",
+            "cost": "from $90"
+          },
+          {
+            "title": "Haircut Short Tapered",
+            "timestamp": "1 hr - 2 hrs",
+            "description":"A taper is a cut that leaves your hair long at the top and short on the sides. Hair gradually gets shorter as you move down the back and sides of your head. THIS IS NOT A BARBER HAIRCUT. We do not do low fades or tight fades. This is a soft short haircut.The finished style is a wash-and-go.This is NOT for wearing your hair straight.",
+            "cost": "from $90"
+          }
+          
+    ],
+   "Styling":[
+
+    { 
+         "title": "Blow Dry/Silk Press",
+    "timestamp": "1 hr, 30 mins - 2 hrs",
+    "description": "Please do NOT apply castor oil or coconut oil to hair before service.If you have NOT had a professional trim/haircut in the last 3 months, you must book a haircut service.If you would like a trim/haircut, please book our hair cut service with a stylist. ",
+    "cost": "$85"
+},
+    {
+        "title": "Half Up Half Down Ponytail",
+        "timestamp": "2 hrs",
+        "description": "Hair is not included",
+        "cost": "$225"
+    },
+    {
+        "title": "Shampoo/Wrap (Relaxed Hair)",
+        "timestamp": "1 hr, 50 mins",
+        "description": "",
+        "cost": "$85"
+    },
+    {
+        "title": "Pony Tail",
+        "timestamp": "2 hrs  •  Ponytail",
+        "description": "Hair is NOT provided.",
+        "cost": "$150"
+    }
+   ],
+   "Color Services":[
+    { 
+        "title": "NEW SINGLE PROCESS WITH FULL HEAD HIGHLIGHTS",
+   "timestamp": "2 hrs, 30 mins",
+   "description": "This process completely changes your hair color to a brown, with a full head of blonde highlights added to create dimension. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+   "cost": "$495"
+},
+{ 
+    "title": "NEW FULL HEAD HIGHLIGHTS",
+"timestamp": "2 hrs, 30 mins",
+"description": "A full head of highlights to make hair blonde, golden, or soft browns. Natural hair base color stays the same. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$410"
+},
+{ 
+    "title": "BLONDE HIGHLIGHTS (Half Head Highlights)",
+"timestamp": "1 hr, 30 mins",
+"description": "A half head of highlights to make hair blonde, golden, or softs browns. Natural hair base color stays the same. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$175"
+},
+{ 
+    "title": "LIGHT BROWN/ SOFT GOLDEN BROWN/ LIGHT ASH BROWN (Virgin Single Process w/ Few Highlights)",
+"timestamp": "2 hrs, 15 mins",
+"description": "MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$185"
+},
+{ 
+    "title": "Dark BROWNS AND BLACK (Virgin Single Process)",
+"timestamp": "1 hr",
+"description": "This is for clients who would like an overall color change in the dark brown family or black and who have never received color before.MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$155"
+},
+{ 
+    "title": "COPPER/ RED HEADS/ BURGUNDY (Virgin Single Process)",
+"timestamp": "2 hrs",
+"description": "MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$195"
+},
+{ 
+    "title": "Creative Color PINK/ BLUE/ GREEN/ PURPLE",
+"timestamp": "2 hrs, 45 mins",
+"description": "Hair Color that is not found in Nature. BLUE PINK GREEN PURPLE. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$250"
+},
+{ 
+    "title": "Root Touch-Up (Single Process)",
+"timestamp": "1 hr",
+"description": "For RETURNING client, and anyone needing a root touch up. With less that 2 inches of root. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$125"
+},
+{ 
+    "title": "Demi/Glaze Color",
+"timestamp": "30 mins",
+"description": "This service is to add shine or color depth to hair.  It is temporary hair color, primarily used to color hair dark and to cover grays. MUST BOOK STYLING SERVICE. (Please book a silk press, haircut, or wash and go for post color service)",
+"cost": "$65"
+}
+   ],
+   "Natural Hairstyling":[
+    { 
+        "title": "Flexi Rod Set",
+   "timestamp": "3 hrs",
+   "description": "",
+   "cost": "$125"
+},
+{ 
+    "title": "Wash & Go - Curly Style",
+"timestamp": "1 hr, 25 mins",
+"description": "",
+"cost": "$60"
+},
+{ 
+    "title": "Braid-Out",
+"timestamp": "1 hr, 50 mins",
+"description": "",
+"cost": "$125"
+},
+{ 
+    "title": "Flat Twist",
+"timestamp": "2 hrs",
+"description": "",
+"cost": "$125"
+}
+   ],
+   "Relaxer/ Texturizer/ Keratin":[
+    { 
+    "title": "Relaxer",
+"timestamp": "1 hr, 25 mins",
+"description": "",
+"cost": "$110"
+},
+{ 
+    "title": "Relaxer and Haircut",
+"timestamp": "1 hr, 40 mins",
+"description": "",
+"cost": "$160"
+},
+{ 
+    "title": "Virgin Relaxer and Hair Cut",
+"timestamp": "2 hrs, 15 mins",
+"description": "",
+"cost": "$200"
+},
+{ 
+    "title": "Halo and Haircut",
+"timestamp": "1 hr",
+"description": "",
+"cost": "$140"
+},
+{ 
+    "title": "Texturizer and Cut",
+"timestamp": "1 hr, 50 mins",
+"description": "",
+"cost": "$190"
+},
+{ 
+    "title": "Texturizer for Curls",
+"timestamp": "1 hr, 40 mins",
+"description": "",
+"cost": "$220"
+},
+{ 
+    "title": "Keratin Smoothing Treatment",
+"timestamp": "2 hrs, 45 mins",
+"description": "",
+"cost": "$350"
+}
+   ],
+   "Extension, Installs and Wigs":[
+    { 
+    "title": "Install Removal",
+"timestamp": "1 hr, 30 mins",
+"description": "Service includes safe removal of extension hair, take down of braided foundation from weave install performed at H2 Salon. . A detox shampoo, deep conditioning treatment. Afterwards hair will be blow dried. Additional styling service must be booked if seeking any styling.",
+"cost": "$100"
+},
+{ 
+    "title": "Intricate Weave Install",
+"timestamp": "5 hrs",
+"description": "An install elaborately curated with you in mind. Service includes the following:-deep cleansing of the scalp-conditioning treatment for your hair's specific needs.—maintenance trim on your hair if needed.-secure braided foundation with a net base-up to 3 bundles installed   -cleansing and preparation of your extensions -desired cut style and finish -information on how to care for and treat your hair at home-first follow up appointment weave blow dry service included **must be booked same day of receiving service and scheduled 1-2 weeks post install**",
+"cost": "$600"
+},
+{ 
+    "title": "Basic Weave Install",
+"timestamp": "3 hrs, 30 mins",
+"description": "",
+"cost": "$350"
+},
+{ 
+    "title": "Braid Down for Wig",
+"timestamp": "1 hr, 30 mins",
+"description": "Does not include instillation. Includes wash condition and braid down.",
+"cost": "$100"
+},
+{ 
+    "title": "Shampoo/Blowdry (Braid Prep)",
+"timestamp": "2 hrs, 45 mins",
+"description": "Straightening/styling/trim is NOT included. ",
+"cost": "$65"
+},
+{ 
+    "title": "Weave Clip-Ins Install",
+"timestamp": "2 hrs",
+"description": "",
+"cost": "$200"
+},
+{ 
+    "title": "Weave Take Out (Prior to Weave Install Only)",
+"timestamp": "35 mins",
+"description": "",
+"cost": "$40"
+}
+   ],
+   "Treatments":[
+    { 
+    "title": "Detox Shampoo",
+"timestamp": "20 mins",
+"description": "This is an add on treatment for clients who have taken out braids or a protective style and have scalp build-up. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled.",
+"cost": "$40"
+},
+{ 
+    "title": "Deep Condition (Standard)",
+"timestamp": "15 mins",
+"description": "This is an add on deep conditioning treatment service for clients who need to restore moisture back into their hair. MUST book styling or haircut service to follow. Appointments made without a styling service will be cancelled. ",
+"cost": "$25"
+}
+   ]
+
+  
+}
