@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Card, Typography } from "@mui/material/";
+import { Box, Typography } from "@mui/material/";
 import Add from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import Dialog from "@mui/material/Dialog";
@@ -139,10 +139,11 @@ const Card1 = ({ feature }: { feature: CardFeature }) => {
             },
 
             minWidth: {
-              xs: "100vw",
+              xs: "90vw",
               md: "780px",
             },
             borderRadius: 4,
+            padding:2,
             justifyContent: "center",
             alignItems: "center",
             overflowX: "hidden",
@@ -160,7 +161,7 @@ const Card1 = ({ feature }: { feature: CardFeature }) => {
           <CloseButton onClick={handleClose} />
         </Box>
 
-        <DialogContent  style={{  width: "100%", padding: "0px 10px 0px 50px"}}>
+        <DialogContent style={{ width: "100%"}}>
           <Typography fontSize={"28px"} fontWeight={"bold"} marginBottom={3}>
             {feature.title}
           </Typography>
@@ -176,7 +177,16 @@ const Card1 = ({ feature }: { feature: CardFeature }) => {
             {feature.cost}
           </Typography>
           {feature.description && (
-            <Typography variant="subtitle2" color={"#000000"} fontWeight={500}>
+
+            <Typography
+              variant="subtitle2"
+              color="#000000"
+              fontWeight={500}
+              
+           style={{ display: "inline-block", whiteSpace: "pre-line" }}
+
+
+            >
               {feature.description}
             </Typography>
           )}
