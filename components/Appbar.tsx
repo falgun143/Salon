@@ -1,6 +1,13 @@
-"use client";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import { AppBar as MuiAppBar, Box, Typography, IconButton, Divider, useMediaQuery, useTheme } from "@mui/material";
+import {
+  AppBar as MuiAppBar,
+  Box,
+  Typography,
+  IconButton,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseButton from "./CloseButton";
@@ -12,35 +19,36 @@ interface AppbarProps {
   children: ReactNode;
 }
 
-const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCategory }) => {
+const Appbar: React.FC<AppbarProps> = ({
+  children,
+  activeCategory,
+  setActiveCategory,
+}) => {
   const theme = useTheme();
-  const isMediumScreen = useMediaQuery(theme.breakpoints.up('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
   const categoriesRef = useRef<HTMLDivElement>(null);
   const [visibleHeadings, setVisibleHeadings] = useState<string[]>([]);
   const [startIndex, setStartIndex] = useState(0);
   const [endIndex, setEndIndex] = useState(4);
 
-  const updateVisibleHeadings = (start: number, end: number) => {
-    setVisibleHeadings(data.headings.slice(start, end + 1).map(h => h.heading));
-  };
-
   useEffect(() => {
-    if (isMediumScreen) {
-      updateVisibleHeadings(startIndex, endIndex);
-    } else {
-      setVisibleHeadings(data.headings.map(h => h.heading));
-    }
-  }, [startIndex, endIndex, isMediumScreen]);
+    setVisibleHeadings(
+      data.headings.slice(startIndex, endIndex + 1).map((h) => h.heading)
+    );
+  }, [startIndex, endIndex]);
 
   const handleScroll = () => {
-    const headerHeight = 180; 
+    const headerHeight = 180;
     let activeHeading = "";
 
     data.headings.forEach((heading) => {
       const section = document.getElementById(heading.heading);
       if (section) {
         const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight - headerHeight && rect.bottom > headerHeight) {
+        if (
+          rect.top < window.innerHeight - headerHeight &&
+          rect.bottom > headerHeight
+        ) {
           activeHeading = heading.heading;
         }
       }
@@ -48,21 +56,12 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
 
     if (activeHeading && activeCategory !== activeHeading) {
       setActiveCategory(activeHeading);
-      const index = data.headings.findIndex(h => h.heading === activeHeading);
+      const index = data.headings.findIndex((h) => h.heading === activeHeading);
       const newStartIndex = Math.max(0, index);
       const newEndIndex = Math.min(data.headings.length - 1, newStartIndex + 4);
 
       setStartIndex(newStartIndex);
       setEndIndex(newEndIndex);
-    }
-
-    if (!isMediumScreen) {
-      // Synchronize horizontal scroll with vertical scroll
-      const container = categoriesRef.current;
-      if (container) {
-        const scrollAmount = window.scrollY / 2; 
-        container.scrollLeft = scrollAmount;
-      }
     }
   };
 
@@ -70,8 +69,9 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
     const container = categoriesRef.current;
     if (container) {
       const containerWidth = container.clientWidth;
-      const headingWidth = containerWidth / 2; 
-      const scrollAmount = direction === "right" ? headingWidth : -headingWidth;
+      const headingWidth = containerWidth / 2;
+      const scrollAmount =
+        direction === "right" ? headingWidth : -headingWidth;
 
       if (direction === "right" && endIndex < data.headings.length - 1) {
         const newEndIndex = Math.min(data.headings.length - 1, endIndex + 2);
@@ -82,7 +82,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
         // Smoothly scroll to the right
         container.scrollBy({
           left: scrollAmount,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       } else if (direction === "left" && startIndex > 0) {
         const newStartIndex = Math.max(0, startIndex - 2);
@@ -93,7 +93,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
         // Smoothly scroll to the left
         container.scrollBy({
           left: scrollAmount,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       }
     }
@@ -102,7 +102,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
   const scrollToHeading = (heading: string) => {
     const section = document.getElementById(heading);
     if (section) {
-      const headerOffset = 245; 
+      const headerOffset = 245;
       const elementPosition = section.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -112,7 +112,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
 
       setActiveCategory(heading);
 
-      const index = data.headings.findIndex(h => h.heading === heading);
+      const index = data.headings.findIndex((h) => h.heading === heading);
       const newStartIndex = Math.max(0, index);
       const newEndIndex = Math.min(data.headings.length - 1, newStartIndex + 4);
 
@@ -127,7 +127,29 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [activeCategory, isMediumScreen]);
+  }, [activeCategory, isMobile]);
+
+  // Touch event handlers for smooth swiping
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.changedTouches[0].screenX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current - touchEndX.current > 50) {
+      // Swiped left
+      handlePagination("right");
+    } else if (touchEndX.current - touchStartX.current > 50) {
+      // Swiped right
+      handlePagination("left");
+    }
+  };
 
   return (
     <>
@@ -142,16 +164,32 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
           justifyContent: "space-between",
           alignItems: "center",
         }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        <Box sx={{ width: "100%", display: "flex", flexDirection: "column", gap: 1 }}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
           <Box
-            sx={{ width: "95%", boxSizing: "border-box", padding: "30px 0px 0px 60px" }}
+            sx={{
+              width: "95%",
+              boxSizing: "border-box",
+              padding: "30px 0px 0px 60px",
+            }}
             style={{
               display: "flex",
               justifyContent: "space-between",
             }}
           >
-            <Typography sx={{ cursor: "pointer", fontWeight: "bold", fontSize: "22px" }}>
+            <Typography
+              sx={{ cursor: "pointer", fontWeight: "bold", fontSize: "22px" }}
+            >
               Select services
             </Typography>
             <CloseButton />
@@ -170,6 +208,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
             overflowX: "auto",
             position: "relative",
             marginBottom: 2,
+            scrollBehavior: "smooth", 
           }}
         >
           <Box
@@ -180,17 +219,17 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
               transition: "transform 0.7s ease",
               width: {
                 xs: "100%",
-                md: "45%"
+                md: "45%",
               },
               gap: "20px",
               alignItems: "center",
               scrollBehavior: "smooth",
               marginLeft: {
                 xs: 0,
-                md: 33
+                md: 33,
               },
-              '&::-webkit-scrollbar': {
-                display: 'none'
+              "&::-webkit-scrollbar": {
+                display: "none",
               },
             }}
           >
@@ -200,15 +239,21 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
                 onClick={() => scrollToHeading(heading.heading)}
                 sx={{
                   cursor: "pointer",
-                  fontWeight: activeCategory === heading.heading ? "bold" : "normal",
-                  color: activeCategory === heading.heading ? "white" : "black",
-                  backgroundColor: activeCategory === heading.heading ? "black" : "white",
+                  fontWeight:
+                    activeCategory === heading.heading ? "bold" : "normal",
+                  color:
+                    activeCategory === heading.heading ? "white" : "black",
+                  backgroundColor:
+                    activeCategory === heading.heading ? "black" : "white",
                   padding: "10px 20px",
                   borderRadius: "50px",
                   transition: "background-color 0.3s, color 0.3s",
-                  display: visibleHeadings.includes(heading.heading) ? "block" : "none",
+                  display:visibleHeadings.includes(heading.heading)  ?"block":"none",
                   "&:hover": {
-                    backgroundColor: activeCategory === heading.heading ? "black" : "#f0f0f0",
+                    backgroundColor:
+                      activeCategory === heading.heading
+                        ? "black"
+                        : "#f0f0f0",
                     borderRadius: "50px",
                   },
                 }}
@@ -218,7 +263,7 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
             ))}
           </Box>
 
-          {isMediumScreen && (
+          {isMobile && (
             <Box sx={{ display: "flex", alignItems: "center", padding: "20px" }}>
               <IconButton
                 onClick={() => handlePagination("left")}
@@ -226,20 +271,19 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
                 sx={{
                   "&:hover": {
                     backgroundColor: "rgba(0, 0, 0, 0.1)",
-                    borderRadius: "100%",
+                    borderRadius: "50px",
                   },
                 }}
               >
                 <ArrowBackIosIcon />
               </IconButton>
-
               <IconButton
                 onClick={() => handlePagination("right")}
-                disabled={endIndex >= data.headings.length - 1}
+                disabled={endIndex === data.headings.length - 1}
                 sx={{
                   "&:hover": {
                     backgroundColor: "rgba(0, 0, 0, 0.1)",
-                    borderRadius: "50%",
+                    borderRadius: "50px",
                   },
                 }}
               >
@@ -249,7 +293,6 @@ const Appbar: React.FC<AppbarProps> = ({ children, activeCategory, setActiveCate
           )}
         </Box>
       </MuiAppBar>
-
       {children}
     </>
   );
