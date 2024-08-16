@@ -25,7 +25,7 @@ const Appbar: React.FC<AppbarProps> = ({
   setActiveCategory,
 }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.up("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.up("sm")); 
   const categoriesRef = useRef<HTMLDivElement>(null);
   const [visibleHeadings, setVisibleHeadings] = useState<string[]>([]);
   const [startIndex, setStartIndex] = useState(0);
@@ -132,23 +132,34 @@ const Appbar: React.FC<AppbarProps> = ({
   // Touch event handlers for smooth swiping
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.changedTouches[0].screenX;
+    setIsSwiping(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     touchEndX.current = e.changedTouches[0].screenX;
+    const difference = touchStartX.current - touchEndX.current;
+
+    // Detect swiping gesture early for a smoother transition
+    if (Math.abs(difference) > 50) {
+      setIsSwiping(true);
+    }
   };
 
   const handleTouchEnd = () => {
-    if (touchStartX.current - touchEndX.current > 50) {
-      // Swiped left
-      handlePagination("right");
-    } else if (touchEndX.current - touchStartX.current > 50) {
-      // Swiped right
-      handlePagination("left");
+    if (isSwiping) {
+      if (touchStartX.current - touchEndX.current > 50) {
+        // Swiped left
+        handlePagination("right");
+      } else if (touchEndX.current - touchStartX.current > 50) {
+        // Swiped right
+        handlePagination("left");
+      }
     }
+    setIsSwiping(false);
   };
 
   return (
@@ -164,9 +175,9 @@ const Appbar: React.FC<AppbarProps> = ({
           justifyContent: "space-between",
           alignItems: "center",
         }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        {...(!isMobile
+          ? { onTouchStart: handleTouchStart, onTouchMove: handleTouchMove, onTouchEnd: handleTouchEnd }
+          : {})}
       >
         <Box
           sx={{
@@ -216,7 +227,7 @@ const Appbar: React.FC<AppbarProps> = ({
             sx={{
               display: "flex",
               overflowX: "auto",
-              transition: "transform 0.7s ease",
+              transition: isSwiping ? "transform 0.5s ease" : "none",
               width: {
                 xs: "100%",
                 md: "45%",
@@ -225,7 +236,7 @@ const Appbar: React.FC<AppbarProps> = ({
               alignItems: "center",
               scrollBehavior: "smooth",
               marginLeft: {
-                xs: 0,
+                xs: 2,
                 md: 33,
               },
               "&::-webkit-scrollbar": {
